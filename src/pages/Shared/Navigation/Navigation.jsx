@@ -1,6 +1,6 @@
 import { Button, Collapse, IconButton, Navbar, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navigation = () => {
     const [openNav, setOpenNav] = useState(false);
@@ -17,48 +17,41 @@ const Navigation = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#" className="flex items-center">
+                <NavLink to="/"
+                    className={({ isActive }) => isActive ? "text-orange-500" : "text-white"}>
                     Home
-                </a>
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
                 variant="small"
                 color="blue-gray"
-                className="p-1 font-normal"
+                className="p-1 font-normal "
             >
-                <a href="#" className="flex items-center">
-                    Dashbord
-                </a>
+                <NavLink to="/menu"
+                    className={({ isActive }) => isActive ? "text-orange-500" : "text-white"}>
+                    Our Menu
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
                 variant="small"
                 color="blue-gray"
-                className="p-1 font-normal"
+                className="p-1 font-normal "
             >
-                <a href="#" className="flex items-center">
-                    Blocks
-                </a>
-            </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-normal"
-            >
-                <a href="#" className="flex items-center">
-                    Docs
-                </a>
+                <NavLink to="/order/salad"
+                    className={({ isActive }) => isActive ? "text-orange-500" : "text-white"}>
+                    Order Food
+                </NavLink>
             </Typography>
         </ul>
     );
 
     return (
-        <header className="px-4 fixed top-0 z-10 w-full">
-            <Navbar shadow={false}  className="mx-auto max-w-screen-xl px-4 py-6 rounded-none">
+        <header className="px-4 fixed top-0 z-50 w-full">
+            <Navbar shadow={false} className="bg-black/80 border-none backdrop-blur-0 w-full mx-auto max-w-screen-xl px-4 py-6 rounded-none">
                 <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-                    <Link to="/" className="font-bold text-xl">
+                    <Link to="/" className="font-bold text-xl text-white">
                         Bistro Boss
                     </Link>
                     <div className="hidden lg:block">{navList}</div>
