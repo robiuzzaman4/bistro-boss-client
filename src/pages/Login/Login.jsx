@@ -78,7 +78,8 @@ const Login = () => {
                                     onChange={(e) => setCaptcha(e.target.value)} />
                                 <Button onClick={handleValidateCaptcha} size='sm' color='blue-gray' >Validate</Button>
                             </div>
-                            <Button disabled={disable} type="submit" color="orange" className="mt-6" fullWidth>
+                            {/* make button disable for captcha */}
+                            <Button disabled={false} type="submit" color="orange" className="mt-6" fullWidth>
                                 Login
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">

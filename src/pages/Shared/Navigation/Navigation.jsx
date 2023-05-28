@@ -1,21 +1,24 @@
-import { Button, Collapse, IconButton, Navbar, Typography } from "@material-tailwind/react";
+import { Badge, Button, Collapse, IconButton, Navbar, Typography } from "@material-tailwind/react";
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
-import { HiMenuAlt4, HiOutlineX } from "react-icons/hi";
+import { HiMenuAlt4, HiOutlineX, HiShoppingCart } from "react-icons/hi";
+import useCart from "../../../hooks/useCart";
 
 const Navigation = () => {
     const { user, userLogout } = useContext(AuthContext);
     const [openNav, setOpenNav] = useState(false);
 
+    const [cart] = useCart();
+
     const handleLogout = () => {
         userLogout()
-        .then(() => {
-            console.log("log out");
-        })
-        .catch((error) => {
-            console.log(error.message);
-        })
+            .then(() => {
+                console.log("log out");
+            })
+            .catch((error) => {
+                console.log(error.message);
+            })
     }
 
     useEffect(() => {
@@ -69,6 +72,22 @@ const Navigation = () => {
                     Secret
                 </NavLink>
             </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-normal "
+            >
+                <NavLink to="/dashbord/mycart"
+                    className={({ isActive }) => isActive ? "text-orange-500" : "text-white"}>
+                    <Badge content={cart?.length || 0} color="orange">
+                        <IconButton color="gray">
+                            <HiShoppingCart className="text-xl" />
+                        </IconButton>
+                    </Badge>
+                </NavLink>
+            </Typography>
+
             {
                 user ?
                     <>
@@ -93,7 +112,7 @@ const Navigation = () => {
 
     return (
         <header className="px-4 fixed top-0 z-50 w-full">
-            <Navbar shadow={false} className="bg-black/80 border-none backdrop-blur-0 w-full mx-auto max-w-screen-xl px-4 py-6 rounded-none">
+            <Navbar shadow={false} className="bg-black/50 border-none backdrop-blur-0 w-full mx-auto max-w-screen-xl px-4 py-4 rounded-none">
                 <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                     <Link to="/" className="font-bold text-xl text-white">
                         Bistro Boss
@@ -109,9 +128,9 @@ const Navigation = () => {
                         onClick={() => setOpenNav(!openNav)}
                     >
                         {openNav ? (
-                            <HiOutlineX/>
+                            <HiOutlineX />
                         ) : (
-                            <HiMenuAlt4/>
+                            <HiMenuAlt4 />
                         )}
                     </IconButton>
                 </div>
